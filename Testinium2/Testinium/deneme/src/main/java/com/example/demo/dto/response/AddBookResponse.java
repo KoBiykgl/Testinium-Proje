@@ -1,7 +1,5 @@
 package com.example.demo.dto.response;
 
-import java.util.List;
-
 import com.example.demo.entity.BookStore;
 import com.example.demo.entity.Category;
 

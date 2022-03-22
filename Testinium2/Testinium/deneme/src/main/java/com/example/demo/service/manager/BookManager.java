@@ -3,19 +3,15 @@ package com.example.demo.service.manager;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import java.util.function.Supplier;
-
-import javax.transaction.Transactional;
 
 import com.example.demo.dto.request.AddBookRequest;
 import com.example.demo.dto.request.UpdateBookRequest;
 import com.example.demo.dto.response.AddBookResponse;
 import com.example.demo.dto.response.BookResponse;
-import com.example.demo.dto.response.BookStoreResponse;
-import com.example.demo.dto.response.UpdateBookResponse;
 import com.example.demo.entity.Book;
 import com.example.demo.repo.BookRepository;
 import com.example.demo.service.BookService;
@@ -77,7 +73,9 @@ public class BookManager implements BookService{
 	
 	@Override
 	public BookResponse removeById(Long id) {
-		var book = bookRepository.findById(id).orElseThrow(bookNotFoundExceptionSupplier);
+		var book = bookRepository.findById(id);
+		if(book == null)
+			book.orElseThrow(bookNotFoundExceptionSupplier);
 		 bookRepository.deleteById(id);
 		 return modelMapper.map(Book.class, BookResponse.class);
 		 

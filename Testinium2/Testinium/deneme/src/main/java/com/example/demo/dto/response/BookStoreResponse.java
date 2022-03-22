@@ -1,7 +1,5 @@
 package com.example.demo.dto.response;
 
-import com.example.demo.entity.Book;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

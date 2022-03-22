@@ -1,7 +1,5 @@
 package com.example.demo.dto.request;
 
-import com.example.demo.entity.Book;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

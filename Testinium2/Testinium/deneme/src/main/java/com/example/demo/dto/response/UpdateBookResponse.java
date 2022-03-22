@@ -1,10 +1,6 @@
 package com.example.demo.dto.response;
 
-import java.util.List;
-
 import com.example.demo.entity.Book;
-import com.example.demo.entity.BookStore;
-import com.example.demo.entity.Category;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

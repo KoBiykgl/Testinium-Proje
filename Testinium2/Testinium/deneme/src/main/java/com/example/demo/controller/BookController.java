@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.RequestScope;
@@ -18,10 +17,8 @@ import com.example.demo.dto.request.AddBookRequest;
 import com.example.demo.dto.request.UpdateBookRequest;
 import com.example.demo.dto.response.AddBookResponse;
 import com.example.demo.dto.response.BookResponse;
-import com.example.demo.dto.response.UpdateBookResponse;
 import com.example.demo.entity.Book;
 import com.example.demo.service.BookService;
-import com.example.demo.service.manager.BookManager;
 
 @RestController
 @RequestScope
@@ -35,7 +32,6 @@ public class BookController {
 	
 	
 	public BookController(BookService bookService) {
-		super();
 		this.bookService = bookService;
 	}
 

@@ -10,14 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.RequestScope;
 
-import com.example.demo.dto.request.AddBookRequest;
 import com.example.demo.dto.request.BookStoreRequest;
-import com.example.demo.dto.response.AddBookResponse;
-import com.example.demo.dto.response.BookResponse;
 import com.example.demo.dto.response.BookStoreResponse;
 import com.example.demo.service.BookStoreService;
-import com.example.demo.service.manager.BookManager;
-import com.example.demo.service.manager.BookStoreManager;
 
 @RestController
 @RequestScope
