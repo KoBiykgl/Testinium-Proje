@@ -1,0 +1,23 @@
+package com.example.demo.dto.response;
+
+import java.util.List;
+
+import com.example.demo.entity.Book;
+import com.example.demo.entity.BookStore;
+import com.example.demo.entity.Category;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+public class BookResponse {
+
+	private String bookName;
+	private double price;
+	private Category category;
+	//private List<BookStore> bookStore;
+	
+
+	
+	
+}

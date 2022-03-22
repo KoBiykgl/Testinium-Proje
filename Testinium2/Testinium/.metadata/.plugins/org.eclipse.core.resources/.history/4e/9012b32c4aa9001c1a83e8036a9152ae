@@ -1,0 +1,8 @@
+package com.example.demo.dto.response;
+
+public class BookStoreResponse {
+
+	private Long id;
+	private String bookStoreName;
+	private String city;
+}

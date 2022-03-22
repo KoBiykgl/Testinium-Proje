@@ -1,0 +1,60 @@
+package com.example.demo.service;
+
+
+
+import java.util.List;
+import java.util.Optional;
+
+import com.example.demo.entity.Category;
+import com.example.repository.CategoryRepository;
+
+public class BookManager implements BookService {
+
+	private CategoryRepository categoryRepository;
+	
+	
+	public BookManager(CategoryRepository categoryRepository) {
+		this.categoryRepository = categoryRepository;
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		
+		return categoryRepository.findAll();
+	}
+
+	@Override
+	public Category getOneCategoryById(Long categoryId) {
+		
+		return categoryRepository.findById(categoryId).orElse(null);
+	}
+
+	@Override
+	public Category createCategory(Category newCategory) {
+		var category=categoryRepository.findById(newCategory.getId());
+		if(category == null))
+		return null;
+		
+		return categoryRepository.save(newCategory);
+	}
+
+	@Override
+	public Category updateCategory(Long categoryId, Category newCategory) {
+		Optional<Category> category= categoryRepository.findById(categoryId);
+		if(category.isPresent()) {
+			var toUpdate = category.get();
+			toUpdate.setCategoryName(newCategory.getCategoryName());
+			categoryRepository.save(toUpdate);
+			return toUpdate;
+		}
+		return null;
+	}
+
+	@Override
+	public Category deleteCategory(Long categoryId) {
+		
+		 categoryRepository.deleteById(categoryId);
+	}
+
+	
+}

@@ -1,0 +1,49 @@
+package com.example.demo.entity;
+
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Entity
+@Table(name = "bookStore")
+@DynamicUpdate
+@Data
+@NoArgsConstructor
+public class BookStore {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String bookStoreName;
+	private String city;
+	
+	
+//	@OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	private List<Book> book;
+	
+//	@ManyToOne(cascade = CascadeType.REMOVE, 
+//			fetch = FetchType.LAZY)
+//	private Book book;
+	
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id",nullable = false)
+	@JsonIgnore
+	private Book book;
+}

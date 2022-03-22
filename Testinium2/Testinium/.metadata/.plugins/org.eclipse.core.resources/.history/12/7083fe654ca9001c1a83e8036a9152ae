@@ -1,0 +1,62 @@
+package com.example.demo.service;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Supplier;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dto.request.BookStoreRequest;
+import com.example.demo.dto.response.BookStoreResponse;
+import com.example.demo.entity.BookStore;
+import com.example.demo.repo.BookStoreRepository;
+
+@Service
+public class BookStoreManager {
+
+	private static final Supplier<IllegalArgumentException>
+    bookNotFoundExceptionSupplier = 
+    () -> new IllegalArgumentException("Cannot find the book");
+	
+	private BookStoreRepository bookStoreRepository;
+
+	private ModelMapper modelMapper;
+
+	public BookStoreManager(BookStoreRepository bookStoreRepository, ModelMapper modelMapper) {
+		this.bookStoreRepository = bookStoreRepository;
+		this.modelMapper = modelMapper;
+	}
+	
+	public BookStoreResponse findById(Long id) {
+		return modelMapper.map(
+				bookStoreRepository.findById(id)
+				.orElseThrow(bookNotFoundExceptionSupplier)
+				, BookStoreResponse.class);
+				
+	}
+	
+	public List<BookStoreResponse> findAll(){
+		return bookStoreRepository.findAll()
+				.stream()
+				.map(bookStore -> modelMapper.map(bookStore, BookStoreResponse.class))
+				.sorted(Comparator.comparing(BookStoreResponse::getBookStoreName));
+	
+			
+		
+				
+	}
+	
+	public BookStoreResponse createBook(BookStoreRequest request) {
+		var bookStore = modelMapper.map(request, BookStore.class);
+		return modelMapper.map(bookStoreRepository.save(bookStore), BookStoreResponse.class);
+		
+	}
+	
+	public BookStoreResponse removeById(Long id) {
+		var bookStore = bookStoreRepository.findById(id)
+				.orElseThrow(bookNotFoundExceptionSupplier);
+		bookStoreRepository.deleteById(id);
+		return modelMapper.map(bookStore, BookStoreResponse.class);
+	}
+}

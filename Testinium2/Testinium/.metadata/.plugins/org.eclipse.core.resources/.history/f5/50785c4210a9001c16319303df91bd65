@@ -1,0 +1,11 @@
+package com.example.demo.dto.response;
+
+import com.example.demo.entity.Category;
+
+public class AddBookResponse {
+
+	private Long id;
+	private String bookName;
+	private double price;
+	Category categories;
+}

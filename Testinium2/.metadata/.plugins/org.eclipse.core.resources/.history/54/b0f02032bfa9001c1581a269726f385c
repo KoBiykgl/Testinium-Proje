@@ -1,0 +1,101 @@
+package com.example.demo.service.manager;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+import java.util.function.Supplier;
+import com.example.demo.dto.request.AddBookRequest;
+import com.example.demo.dto.request.UpdateBookRequest;
+import com.example.demo.dto.response.AddBookResponse;
+import com.example.demo.dto.response.BookResponse;
+import com.example.demo.dto.response.UpdateBookResponse;
+import com.example.demo.entity.Book;
+import com.example.demo.repo.BookRepository;
+
+@Service
+public class BookManager {
+
+	private static final Supplier<IllegalArgumentException>
+    bookNotFoundExceptionSupplier = 
+    () -> new IllegalArgumentException("Cannot find the book");
+	
+	private BookRepository bookRepository;
+
+	private ModelMapper modelMapper;
+	
+
+	public BookManager(BookRepository bookRepository, ModelMapper modelMapper) {
+		this.bookRepository = bookRepository;
+		
+		this.modelMapper = modelMapper;
+	}
+	
+	public BookResponse findById(Long id) {
+		return modelMapper.map(
+				bookRepository.findById(id)
+				.orElseThrow(bookNotFoundExceptionSupplier)
+				, BookResponse.class);
+				
+	}
+	
+	public List<BookResponse> findAll(){
+		return bookRepository.findAll()
+				.stream()
+				.map(book -> modelMapper.map(book, BookResponse.class))
+				.sorted(Comparator.comparing(BookResponse::getBookName))
+				.toList();
+				
+	}
+	
+	
+	public AddBookResponse createBook(AddBookRequest request) {
+		var book = modelMapper.map(request, Book.class);
+		return modelMapper.map(bookRepository.save(book), AddBookResponse.class);
+		
+	}
+	
+	public Book updateOneBookById(Long bookId, UpdateBookRequest updateBookRequest) {
+		Optional<Book> bookdb = bookRepository.findById(bookId);
+		if(bookdb.isPresent()) {
+			var toUpdate = bookdb.get();
+			toUpdate.setCategory(updateBookRequest.getCategory());
+			bookRepository.save(toUpdate);
+			return toUpdate;
+		}
+		return null;
+	}
+	
+	
+	public void removeById(Long id) {
+		var book = bookRepository.findById(id).orElseThrow(bookNotFoundExceptionSupplier);
+		 bookRepository.deleteById(id);
+//		var book = bookRepository.findById(id)
+//				.orElseThrow(bookNotFoundExceptionSupplier);
+//		 bookRepository.deleteById(id);
+//		return modelMapper.map(book, BookResponse.class);
+	}
+
+	
+	public List<BookResponse> getAllBookCategoryId(Long categoryId) {
+		return bookRepository.findAllBookByCategoryId(categoryId)
+				.stream()
+				.map(book -> modelMapper.map(book, BookResponse.class))
+				.sorted(Comparator.comparing(BookResponse::getBookName))
+				.toList();
+	}
+
+
+	public List<BookResponse> getAllBookByBookStoreId(Long bookStoreId) {
+		return bookRepository.findAllBookByBookStoreId(bookStoreId)
+				.stream()
+				.map(book -> modelMapper.map(book, BookResponse.class))
+				.sorted(Comparator.comparing(BookResponse::getBookName))
+				.toList();
+	}
+
+	
+	
+}

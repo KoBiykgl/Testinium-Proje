@@ -1,0 +1,21 @@
+package com.example.demo.dto.request;
+
+import java.util.List;
+
+import com.example.demo.entity.BookStore;
+import com.example.demo.entity.Category;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+
+public class UpdateBookRequest {
+	
+//	private String bookName;
+//	private double price;
+//	private Category category;
+//	private List<BookStore> bookStore;
+	private Category category;
+
+}

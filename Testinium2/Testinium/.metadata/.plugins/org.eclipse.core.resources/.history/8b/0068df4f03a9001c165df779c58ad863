@@ -1,0 +1,50 @@
+package com.example.demo.service;
+
+
+
+import java.util.List;
+
+import com.example.demo.entity.Category;
+import com.example.repository.CategoryRepository;
+
+public class BookManager implements BookService {
+
+	private CategoryRepository categoryRepository;
+	
+	
+	public BookManager(CategoryRepository categoryRepository) {
+		this.categoryRepository = categoryRepository;
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		
+		return categoryRepository.findAll();
+	}
+
+	@Override
+	public Category getOneCategoryById(Long categoryId) {
+		
+		return categoryRepository.findById(categoryId).orElse(null);
+	}
+
+	@Override
+	public Category createCategory(Category category) {
+		var category=categoryRepository.findById(category.ge)
+		return null;
+	}
+
+	@Override
+	public Category updateCategory(Long categoryId, Category category) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Category deleteCategory(Long categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+}

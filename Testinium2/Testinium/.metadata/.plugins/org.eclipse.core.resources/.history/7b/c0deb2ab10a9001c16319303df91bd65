@@ -1,0 +1,17 @@
+package com.example.demo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.repo.BookRepository;
+
+@Service
+public class BookManager implements BookService {
+
+	private BookRepository bookRepository;
+
+	public BookManager(BookRepository bookRepository) {
+		this.bookRepository = bookRepository;
+	}
+	
+	
+}

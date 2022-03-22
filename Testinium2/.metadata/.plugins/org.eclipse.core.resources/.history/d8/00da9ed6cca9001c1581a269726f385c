@@ -1,0 +1,17 @@
+
+server.address=localhost
+server.port=7683
+server.servlet.context-path=/crm
+spring.mvc.servlet.path=/api/v1
+
+
+spring.jpa.hibernate.ddl-auto=update
+
+
+spring.datasource.url=jdbc:mysql://localhost:3306/bookdbdeneme
+spring.datasource.username=root
+spring.datasource.password=537417
+
+apiMajorVersion=1
+apiMinorVersion=1
+apiTimeStamp=1539748037

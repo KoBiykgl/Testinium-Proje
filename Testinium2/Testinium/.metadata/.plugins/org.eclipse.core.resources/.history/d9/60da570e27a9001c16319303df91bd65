@@ -1,0 +1,18 @@
+package com.example.demo.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.example.demo.dto.request.AddBookRequest;
+import com.example.demo.dto.response.BookResponse;
+import com.example.demo.entity.Book;
+
+public interface BookService {
+
+	List<Book> getAll();
+
+	Book createBook(AddBookRequest request);
+
+	List<Book> getAllBookCategoryId(Optional<Long> categoryId);
+
+}

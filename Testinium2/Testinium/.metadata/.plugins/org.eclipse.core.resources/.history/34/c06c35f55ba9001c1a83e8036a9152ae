@@ -1,0 +1,50 @@
+package com.example.demo.config;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.example.demo.dto.request.UpdateBookRequest;
+import com.example.demo.entity.Book;
+import com.example.demo.entity.BookStore;
+
+import java.util.ArrayList;
+
+import org.modelmapper.Converter;
+@Configuration
+public class ModelMapperConfig {
+	
+	private static final Converter<UpdateBookRequest, 
+    Book> 
+	UPDATE_BOOK_REQUEST_TO_CUSTOMER_CONVERTER = 
+	(context) ->{
+		
+		var book = context.getDestination();
+		var updateBookReq= context.getSource();
+//		book.setBookName(updateBookReq.getBookName());
+//		book.setPrice(updateBookReq.getPrice());
+		book.setCategory(updateBookReq.getCategory().getId());
+		
+//		var bookStore=updateBookReq.getBookStore()
+//				.stream()
+//				.map(store ->{
+//					var st= new BookStore();
+//					st.setBookStoreName(store.getBookStoreName());
+//					st.setCity(store.getCity());
+//					return st;
+//				}).toList();
+//		
+//				
+//		book.setBookStore(new ArrayList<>(bookStore));
+		return book;
+	};
+	
+	
+	@Bean
+	public ModelMapper mapper() {
+		var mapper = new ModelMapper();
+		mapper.addConverter(UPDATE_BOOK_REQUEST_TO_CUSTOMER_CONVERTER , 
+				UpdateBookRequest.class, Book.class );
+		return mapper;
+	}
+}

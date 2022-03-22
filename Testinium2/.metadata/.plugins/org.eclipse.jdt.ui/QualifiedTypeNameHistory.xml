@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.Set"/>
+    <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+    <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
+    <fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
+    <fullyQualifiedTypeName name="com.example.demo.entity.BookStore"/>
+    <fullyQualifiedTypeName name="com.example.demo.dto.response.BookStoreResponse"/>
+    <fullyQualifiedTypeName name="com.example.demo.service.BookStoreService"/>
+    <fullyQualifiedTypeName name="com.example.demo.dto.request.BookStoreRequest"/>
+    <fullyQualifiedTypeName name="com.example.demo.dto.response.BookResponse"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="com.example.demo.service.BookService"/>
+    <fullyQualifiedTypeName name="com.example.demo.entity.Category"/>
+    <fullyQualifiedTypeName name="javax.websocket.server.PathParam"/>
+    <fullyQualifiedTypeName name="com.example.demo.entity.Book"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="javax.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
+</qualifiedTypeNameHistroy>

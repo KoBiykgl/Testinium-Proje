@@ -1,0 +1,7 @@
+server.port=7681
+spring.jpa.hibernate.ddl-auto=update
+
+
+spring.datasource.url=jdbc:mysql://localhost:3306/booka
+spring.datasource.username=root
+spring.datasource.password=537417

@@ -1,0 +1,24 @@
+package com.example.demo.dto.response;
+
+import com.example.demo.entity.Book;
+
+import lombok.Data;
+
+@Data
+
+public class AddBookResponse {
+
+	//private Long id;
+	private String bookName;
+	private double price;
+	Long categoryId;
+	public AddBookResponse(Book entity) {
+		this.id=entity.getId();
+		this.bookName=entity.getBookName();
+		this.price=entity.getPrice();
+		this.categoryId=entity.getCategories().getId();
+	}
+
+	
+	
+}

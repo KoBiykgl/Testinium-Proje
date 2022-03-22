@@ -1,0 +1,37 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dto.request.AddBookRequest;
+import com.example.demo.dto.response.AddBookResponse;
+import com.example.demo.entity.Book;
+import com.example.demo.repo.BookRepository;
+
+@Service
+public class BookManager implements BookService {
+
+	private BookRepository bookRepository;
+	
+	
+
+	public BookManager(BookRepository bookRepository) {
+		this.bookRepository = bookRepository;
+		
+	}
+
+	@Override
+	public List<Book> getAll() {
+		return bookRepository.findAll();
+	}
+
+	@Override
+	public AddBookResponse createBook(AddBookRequest request) {
+		var book = modelMapper.map(request, Book.class);
+		return modelMapper.map(bookRepository.save(book), AddBookResponse.class);
+	}
+	
+	
+}

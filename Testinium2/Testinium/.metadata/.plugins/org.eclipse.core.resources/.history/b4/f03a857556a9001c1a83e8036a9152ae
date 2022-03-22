@@ -1,0 +1,16 @@
+package com.example.demo.dto.request;
+
+import com.example.demo.entity.Book;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class BookStoreRequest {
+	private Long id;
+	private String bookStoreName;
+	private String city;
+	private Long bookId;
+	
+}

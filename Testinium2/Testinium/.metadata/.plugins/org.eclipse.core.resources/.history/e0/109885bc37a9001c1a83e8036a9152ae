@@ -1,0 +1,86 @@
+package com.example.demo.service;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+import java.util.function.Supplier;
+import com.example.demo.dto.request.AddBookRequest;
+import com.example.demo.dto.request.UpdateBookRequest;
+import com.example.demo.dto.response.AddBookResponse;
+import com.example.demo.dto.response.BookResponse;
+import com.example.demo.entity.Book;
+import com.example.demo.repo.BookRepository;
+
+@Service
+public class BookManager {
+
+	private static final Supplier<IllegalArgumentException>
+    bookNotFoundExceptionSupplier = 
+    () -> new IllegalArgumentException("Cannot find the customer");
+	
+	private BookRepository bookRepository;
+	private CategoryService categoryService;
+	private ModelMapper modelMapper;
+	
+
+	public BookManager(BookRepository bookRepository, CategoryService categoryService, ModelMapper modelMapper) {
+		this.bookRepository = bookRepository;
+		this.categoryService = categoryService;
+		this.modelMapper = modelMapper;
+	}
+	
+	public BookResponse findById(Long id) {
+		return modelMapper.map(
+				bookRepository.findById(id)
+				.orElseThrow(bookNotFoundExceptionSupplier)
+				, BookResponse.class);
+				
+	}
+	
+	public List<BookResponse> findAll(){
+		return bookRepository.findAll()
+				.stream()
+				.map(book -> modelMapper.map(book, BookResponse.class))
+				.sorted(Comparator.comparing(BookResponse::getBookName))
+				.toList();
+				
+	}
+	
+	
+	public AddBookResponse createBook(AddBookRequest request) {
+		var book = modelMapper.map(request, Book.class);
+		return modelMapper.map(bookRepository.save(book), AddBookResponse.class);
+		
+	}
+	
+	public BookResponse removeById(Long id) {
+		var book = bookRepository.findById(id)
+				.orElseThrow(bookNotFoundExceptionSupplier);
+		bookRepository.deleteById(id);
+		return modelMapper.map(book, BookResponse.class);
+	}
+
+	
+	public List<BookResponse> getAllBookCategoryId(Long categoryId) {
+		return bookRepository.findAllBookByCategoryId(categoryId)
+				.stream()
+				.map(book -> modelMapper.map(book, BookResponse.class))
+				.sorted(Comparator.comparing(BookResponse::getBookName))
+				.toList();
+	}
+
+
+	public List<Book> getAllBookByBookStoreId(Optional<Long> bookStoreId) {
+		return bookRepository.findAllBookByBookStoreId(bookStoreId)
+				.stream()
+				.map(book -> modelMapper.map(book, BookResponse.class))
+				.sorted(Comparator.comparing(BookResponse::getBookName))
+				.toList();
+	}
+
+	
+	
+}

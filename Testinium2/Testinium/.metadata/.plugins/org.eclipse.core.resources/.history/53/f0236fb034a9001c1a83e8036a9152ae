@@ -1,0 +1,54 @@
+package com.example.demo.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+import java.util.function.Supplier;
+import com.example.demo.dto.request.AddBookRequest;
+import com.example.demo.dto.request.UpdateBookRequest;
+import com.example.demo.dto.response.BookResponse;
+import com.example.demo.entity.Book;
+import com.example.demo.repo.BookRepository;
+
+@Service
+public class BookManager {
+
+	private static final Supplier<IllegalArgumentException>
+    customerNotFoundExceptionSupplier = 
+    () -> new IllegalArgumentException("Cannot find the customer");
+	
+	private BookRepository bookRepository;
+	private CategoryService categoryService;
+	private ModelMapper modelMapper;
+	
+
+	public BookManager(BookRepository bookRepository, CategoryService categoryService, ModelMapper modelMapper) {
+		this.bookRepository = bookRepository;
+		this.categoryService = categoryService;
+		this.modelMapper = modelMapper;
+	}
+
+	
+
+	
+	
+
+//	@Override
+//	public List<Book> getAllBookCategoryId(Optional<Long> categoryId) {
+//		if(categoryId.isPresent())
+//			return bookRepository.findAllBookByCategoryId(categoryId.get());
+//		return null;
+//	}
+
+//	@Override
+//	public List<Book> getAllBookByBookStoreId(Optional<Long> bookStoreId) {
+//		if(bookStoreId.isPresent())
+//			return bookRepository.findAllBookByBookStoreId(bookStoreId.get());
+//		return bookRepository.findAll();
+//	}
+
+	
+	
+}

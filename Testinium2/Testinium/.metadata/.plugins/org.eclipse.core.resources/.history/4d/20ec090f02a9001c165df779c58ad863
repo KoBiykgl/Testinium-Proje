@@ -1,0 +1,7 @@
+package com.example.demo.service.manager;
+
+import com.example.demo.service.BookService;
+
+public class BookManager implements BookService {
+
+}
